@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="plg_payment_altauserpoints" default="zip" basedir=".">
+
+	<property name="project-name" value="${ant.project.name}" />
+	<property name="mainpath" value="D:\Jobs\Joomla\Plugin\plg_payments_altauserpoints\" />
+	<property name="typefolder" value="plugins" />
+	<property name="plugintype" value="payment" />
+	<property name="pluginfolder" value="altauserpoints" />
+	<property name="language1" value="da-DK" />
+	<property name="language2" value="de-DE" />
+	<property name="language3" value="en-GB" />    
+	<property name="language4" value="es-ES" />
+	<property name="language5" value="it-IT" />
+	<property name="language6" value="nl-NL" />
+	<property name="language7" value="pt-PT" />
+	<property name="language8" value="sv-SE" />
+	<property name="language9" value="th-TH" />
+    <property name="tempstorage" value="packages" />
+	<property name="zipdestination" value="D:\jobs\Joomla\Plugin\plg_payments_altauserpoints" />
+	
+	<property name="maincopypath" value="${mainpath}\packages\${project-name}\temp" />
+	<property name="mainoriginalpath" value="${mainpath}\CODE" />
+	
+	
+	
+	<target name="zip">
+		<!-- Get version info -->
+		<input message="Version Number:" addproperty="version" />
+		
+		<!-- move all files to a temporary location before zipping -->
+			<!--the main files -->
+			<copy todir="${maincopypath}">
+				<fileset dir="${mainoriginalpath}">
+                    <exclude name="**/*build*"/>
+                </fileset>
+			</copy>
+		
+			<!--the language files -->
+			<copy file="./${language1}/${language1}.${project-name}.ini" todir="${maincopypath}"/>
+   			<copy file="./${language2}/${language2}.${project-name}.ini" todir="${maincopypath}"/>
+   			<copy file="./${language3}/${language3}.${project-name}.ini" todir="${maincopypath}"/>
+			<copy file="./${language4}/${language4}.${project-name}.ini" todir="${maincopypath}"/>
+			<copy file="./${language5}/${language5}.${project-name}.ini" todir="${maincopypath}"/>
+			<copy file="./${language6}/${language6}.${project-name}.ini" todir="${maincopypath}"/>
+			<copy file="./${language7}/${language7}.${project-name}.ini" todir="${maincopypath}"/>
+			<copy file="./${language8}/${language8}.${project-name}.ini" todir="${maincopypath}"/>
+			<copy file="./${language9}/${language9}.${project-name}.ini" todir="${maincopypath}"/>
+
+			<copy file="${mainoriginalpath}/index.html" todir="${maincopypath}"/>
+				
+		
+			<!--the media files 
+			<copy todir="${maincopypath}/media">
+				<fileset dir="${mainpath}/media/${project-name}"/>
+			</copy>
+			-->
+		
+		<!-- zip up the files -->
+		<zip destfile="${zipdestination}/${project-name}-${version}.zip" basedir="${mainpath}/packages/${project-name}/temp" />
+	
+		
+		<!-- delete the temporary files -->
+		<delete dir="${mainpath}/packages/${project-name}/temp"/>
+	
+	</target>
+
+
+</project>
